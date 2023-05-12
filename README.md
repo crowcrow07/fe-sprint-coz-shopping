@@ -1,4 +1,4 @@
-# **fe-sprint-coz-shopping**
+# fe-sprint-coz-shopping
 
 ## 코드 스테이츠에서 주관하는 쇼핑몰 솔로 프로젝트입니다.
 
