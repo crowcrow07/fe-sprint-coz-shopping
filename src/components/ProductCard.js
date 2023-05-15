@@ -9,6 +9,26 @@ export default function ProductCard({ productsData }) {
   const discountPercentage = productsData.discountPercentage;
   const follower = productsData.follower;
 
+  const renderTitle = () => {
+    switch (type) {
+      case "Category":
+        return `#${title}`;
+      case "Product":
+        return title;
+      case "Brand":
+        return brandName;
+      default:
+        return null;
+    }
+  };
+
+  const renderPrice = () => {
+    if (!price) {
+      return follower;
+    }
+    return (+price).toLocaleString();
+  };
+
   return (
     <div className="flex flex-col w-264 h-264 border">
       <div className="h-4/5">
@@ -20,9 +40,7 @@ export default function ProductCard({ productsData }) {
       </div>
       <div className="flex flex-col h-1/5">
         <div className="flex flex-row justify-between">
-          <div>
-            {type === "Category" ? `#${title}` : title ? title : brandName}
-          </div>
+          <div>{renderTitle()}</div>
           <div className={discountPercentage ? "text-violet-600" : ""}>
             {discountPercentage
               ? `${discountPercentage}%`
@@ -33,7 +51,7 @@ export default function ProductCard({ productsData }) {
         </div>
         <div className="flex flex-row justify-between">
           <div>{subTitle}</div>
-          <div>{price ? (+price).toLocaleString() : follower}</div>
+          <div>{renderPrice()}</div>
         </div>
       </div>
     </div>
