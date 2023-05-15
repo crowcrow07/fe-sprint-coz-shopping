@@ -1,18 +1,29 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import StarOutlineIcon from "@mui/icons-material/StarOutline";
 import { FiGift, FiStar } from "react-icons/fi";
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openProductList = () => {
+    navigate("/products/list");
+    setAnchorEl(null);
+  };
+
+  const openBookMark = () => {
+    navigate("/bookmark");
     setAnchorEl(null);
   };
 
@@ -37,10 +48,10 @@ export default function BasicMenu() {
         }}
       >
         <MenuItem onClick={handleClose}>까악이님, 안녕하세요!</MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={openProductList}>
           {<FiGift />} 상품리스트 페이지
         </MenuItem>
-        <MenuItem onClick={handleClose}>{<FiStar />} 북마크 페이지</MenuItem>
+        <MenuItem onClick={openBookMark}>{<FiStar />} 북마크 페이지</MenuItem>
       </Menu>
     </div>
   );
