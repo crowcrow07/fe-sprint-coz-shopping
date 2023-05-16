@@ -1,4 +1,12 @@
-export default function ProductCard({ productsData }) {
+import { useState } from "react";
+
+import StarIcon from "@mui/icons-material/Star";
+
+export default function ProductCard({
+  productsData,
+  localDataes,
+  setLocalDataes,
+}) {
   const type = productsData.type;
   const imgUrl = productsData.image_url;
   const brandImgUrl = productsData.brand_image_url;
@@ -8,6 +16,8 @@ export default function ProductCard({ productsData }) {
   const price = productsData.price;
   const discountPercentage = productsData.discountPercentage;
   const follower = productsData.follower;
+
+  const [onClickBookMark, setOnClickBookMark] = useState(false);
 
   const renderTitle = () => {
     switch (type) {
@@ -31,9 +41,37 @@ export default function ProductCard({ productsData }) {
     return (+price).toLocaleString();
   };
 
+  const onClickHandler = () => {
+    setOnClickBookMark(!onClickBookMark);
+    if (
+      localDataes.findIndex((localData) => localData.id === productsData.id) ===
+      -1
+    ) {
+      setLocalDataes([...localDataes, productsData]);
+    } else if (
+      localDataes.findIndex((localData) => localData.id === productsData.id) !==
+      -1
+    ) {
+      setLocalDataes(
+        localDataes.filter((localData) => {
+          return localData.id !== productsData.id;
+        })
+      );
+    }
+  };
+
   return (
-    <div className="flex flex-col w-264 h-264">
+    <div className="flex relative flex-col w-264 h-264">
       <div className="h-4/5">
+        <div className="absolute bottom-14 right-2" onClick={onClickHandler}>
+          <StarIcon
+            className="drop-shadow-lg"
+            sx={{
+              color: onClickBookMark ? "#FFD361" : "#DFDFDF",
+              fontSize: 40,
+            }}
+          />
+        </div>
         <img
           className="h-full w-full rounded-lg"
           src={brandImgUrl ? brandImgUrl : imgUrl}
