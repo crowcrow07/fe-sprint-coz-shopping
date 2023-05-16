@@ -17,6 +17,8 @@ export default function ProductCard({ productsData }) {
         return title;
       case "Brand":
         return brandName;
+      case "Exhibition":
+        return title;
       default:
         return null;
     }
@@ -30,17 +32,17 @@ export default function ProductCard({ productsData }) {
   };
 
   return (
-    <div className="flex flex-col w-264 h-264 border">
+    <div className="flex flex-col w-264 h-264">
       <div className="h-4/5">
         <img
-          className="h-full w-full"
+          className="h-full w-full rounded-lg"
           src={brandImgUrl ? brandImgUrl : imgUrl}
           alt="상품이미지"
         />
       </div>
       <div className="flex flex-col h-1/5">
         <div className="flex flex-row justify-between">
-          <div>{renderTitle()}</div>
+          <div className="font-bold">{renderTitle()}</div>
           <div className={discountPercentage ? "text-violet-600" : ""}>
             {discountPercentage
               ? `${discountPercentage}%`
