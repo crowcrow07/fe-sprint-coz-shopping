@@ -11,7 +11,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <div className="flex flex-col">
+      <div className="flex flex-col h-screen justify-between">
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
