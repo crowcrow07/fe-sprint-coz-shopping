@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import Header from "./components/Header";
 import Main from "./Page/Main";
@@ -9,16 +10,29 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
+  const [localDataes, setLocalDataes] = useState([]);
+
   return (
     <div className="App">
-      <div className="flex flex-col h-screen justify-between">
+      <div className="flex flex-col w-screen h-screen justify-between">
         <Header />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/products/list" element={<ProductsList />} />
-          <Route path="/bookmark" element={<BookMark />} />
-          <Route path="*" element={<div>없는페이지임</div>} />
-        </Routes>
+        <div className="flex justify-center w-screen">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  localDataes={localDataes}
+                  setLocalDataes={setLocalDataes}
+                />
+              }
+            />
+            <Route path="/products/list" element={<ProductsList />} />
+            <Route path="/bookmark" element={<BookMark />} />
+            <Route path="*" element={<div>없는페이지임</div>} />
+          </Routes>
+        </div>
+
         <Footer />
       </div>
     </div>
