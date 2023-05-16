@@ -9,7 +9,7 @@ export default function Header() {
   };
 
   return (
-    <div className="flex sticky justify-between border border-black h-80 items-center">
+    <header className="flex sticky justify-between border border-black h-80 items-center">
       <div>
         <img
           className="cursor-pointer"
@@ -19,6 +19,6 @@ export default function Header() {
         />
       </div>
       <BasicMenu />
-    </div>
+    </header>
   );
 }
