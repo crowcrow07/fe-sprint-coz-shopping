@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const API_BASE = "http://cozshopping.codestates-seb.link/api/v1/products";
 
 export default {
