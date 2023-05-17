@@ -27,8 +27,24 @@ function App() {
                 />
               }
             />
-            <Route path="/products/list" element={<ProductsList />} />
-            <Route path="/bookmark" element={<BookMark />} />
+            <Route
+              path="/products/list"
+              element={
+                <ProductsList
+                  localDataes={localDataes}
+                  setLocalDataes={setLocalDataes}
+                />
+              }
+            />
+            <Route
+              path="/bookmark"
+              element={
+                <BookMark
+                  localDataes={localDataes}
+                  setLocalDataes={setLocalDataes}
+                />
+              }
+            />
             <Route path="*" element={<div>없는페이지임</div>} />
           </Routes>
         </div>
