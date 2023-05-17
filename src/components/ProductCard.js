@@ -1,19 +1,16 @@
-import { useState } from "react";
-
 import StarIcon from "@mui/icons-material/Star";
 
 export default function ProductCard({
   productsData,
   localDataes,
   setLocalDataes,
+  localIdList,
+  setLocalIdList,
 }) {
   const imgUrl = productsData.image_url;
   const brandImgUrl = productsData.brand_image_url;
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
   const onClickHandler = () => {
-    setIsBookmarked(!isBookmarked);
     if (
       localDataes.findIndex((localData) => localData.id === productsData.id) ===
       -1
@@ -28,6 +25,26 @@ export default function ProductCard({
     }
   };
 
+  const isClickedBookMark = (id) => {
+    if (localIdList.findIndex((v) => v === productsData.id) === -1) {
+      setLocalIdList([...localIdList, id]);
+    } else {
+      setLocalIdList(
+        localIdList.filter((v) => {
+          return v !== productsData.id;
+        })
+      );
+    }
+  };
+
+  const changeBookmarkBtn = (id) => {
+    if (localIdList.findIndex((v) => v === id) === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   return (
     <div className="flex relative flex-col w-264 h-264">
       <div className="h-4/5">
@@ -38,9 +55,11 @@ export default function ProductCard({
         />
         <div className="absolute bottom-14 right-2" onClick={onClickHandler}>
           <StarIcon
+            onClick={() => isClickedBookMark(productsData.id)}
             className="drop-shadow-lg"
             sx={{
-              color: isBookmarked ? "#FFD361" : "#DFDFDF",
+              color: () =>
+                changeBookmarkBtn(productsData.id) ? "#FFD361" : "#DFDFDF",
               fontSize: 40,
             }}
           />
