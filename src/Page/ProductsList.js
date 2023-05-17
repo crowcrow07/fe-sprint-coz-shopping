@@ -2,22 +2,21 @@ import { useState, useEffect } from "react";
 
 import Products from "../api/Products";
 import Filter from "../components/Filter";
-import ProductCard from "../components/ProductCard";
+import ProductCard, {
+  getIsBookMarked,
+  toggleBookMarked,
+} from "../components/ProductCard";
 
 export default function ProductsList({
-  localDataes,
-  setLocalDataes,
-  localIdList,
-  setLocalIdList,
-  isBookmarked,
-  setIsBookmarked,
+  bookMarkedIdList,
+  setBookMarkedIdList,
 }) {
-  const [productsDataes, setProductsDataes] = useState(null);
+  const [products, setproducts] = useState(null);
   useEffect(() => {
     Products.getAllProducts()
       .then((res) => res.json())
       .then((json) => {
-        setProductsDataes(json);
+        setproducts(json);
       });
   }, []);
 
@@ -27,18 +26,20 @@ export default function ProductsList({
         <Filter />
       </div>
       <div className="flex flex-row flex-wrap w-5/6 justify-between">
-        {productsDataes &&
-          productsDataes.map((data) => {
+        {products &&
+          products.map((data) => {
             return (
               <ProductCard
                 key={data.id}
-                productsData={data}
-                localDataes={localDataes}
-                setLocalDataes={setLocalDataes}
-                localIdList={localIdList}
-                setLocalIdList={setLocalIdList}
-                isBookmarked={isBookmarked}
-                setIsBookmarked={setIsBookmarked}
+                data={data}
+                isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
+                onClickBookMark={() => {
+                  toggleBookMarked(
+                    bookMarkedIdList,
+                    setBookMarkedIdList,
+                    data.id
+                  );
+                }}
               />
             );
           })}
