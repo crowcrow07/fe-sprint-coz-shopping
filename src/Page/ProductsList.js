@@ -4,7 +4,14 @@ import Products from "../api/Products";
 import Filter from "../components/Filter";
 import ProductCard from "../components/ProductCard";
 
-export default function ProductsList({ localDataes, setLocalDataes }) {
+export default function ProductsList({
+  localDataes,
+  setLocalDataes,
+  localIdList,
+  setLocalIdList,
+  isBookmarked,
+  setIsBookmarked,
+}) {
   const [productsDataes, setProductsDataes] = useState(null);
   useEffect(() => {
     Products.getAllProducts()
@@ -13,6 +20,7 @@ export default function ProductsList({ localDataes, setLocalDataes }) {
         setProductsDataes(json);
       });
   }, []);
+
   return (
     <div className="flex flex-col w-screen items-center">
       <div>
@@ -23,9 +31,14 @@ export default function ProductsList({ localDataes, setLocalDataes }) {
           productsDataes.map((data) => {
             return (
               <ProductCard
+                key={data.id}
                 productsData={data}
                 localDataes={localDataes}
                 setLocalDataes={setLocalDataes}
+                localIdList={localIdList}
+                setLocalIdList={setLocalIdList}
+                isBookmarked={isBookmarked}
+                setIsBookmarked={setIsBookmarked}
               />
             );
           })}

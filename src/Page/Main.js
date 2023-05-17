@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import Products from "../api/Products";
 
-export default function Main({ localDataes, setLocalDataes }) {
+export default function Main({
+  localDataes,
+  setLocalDataes,
+  localIdList,
+  setLocalIdList,
+  isBookmarked,
+  setIsBookmarked,
+}) {
   const [productsDataes, setProductsDataes] = useState(null);
   useEffect(() => {
     Products.getFourProducts()
@@ -24,6 +31,10 @@ export default function Main({ localDataes, setLocalDataes }) {
                 productsData={data}
                 localDataes={localDataes}
                 setLocalDataes={setLocalDataes}
+                localIdList={localIdList}
+                setLocalIdList={setLocalIdList}
+                isBookmarked={isBookmarked}
+                setIsBookmarked={setIsBookmarked}
               />
             );
           })}
@@ -40,6 +51,10 @@ export default function Main({ localDataes, setLocalDataes }) {
                     productsData={data}
                     localDataes={localDataes}
                     setLocalDataes={setLocalDataes}
+                    localIdList={localIdList}
+                    setLocalIdList={setLocalIdList}
+                    isBookmarked={isBookmarked}
+                    setIsBookmarked={setIsBookmarked}
                   />
                 );
               }
