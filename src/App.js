@@ -11,6 +11,8 @@ import "./App.css";
 
 function App() {
   const [localDataes, setLocalDataes] = useState([]);
+  const [localIdList, setLocalIdList] = useState([]);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   return (
     <div className="App">
@@ -24,6 +26,10 @@ function App() {
                 <Main
                   localDataes={localDataes}
                   setLocalDataes={setLocalDataes}
+                  localIdList={localIdList}
+                  setLocalIdList={setLocalIdList}
+                  isBookmarked={isBookmarked}
+                  setIsBookmarked={setIsBookmarked}
                 />
               }
             />
@@ -33,6 +39,10 @@ function App() {
                 <ProductsList
                   localDataes={localDataes}
                   setLocalDataes={setLocalDataes}
+                  localIdList={localIdList}
+                  setLocalIdList={setLocalIdList}
+                  isBookmarked={isBookmarked}
+                  setIsBookmarked={setIsBookmarked}
                 />
               }
             />
@@ -42,6 +52,10 @@ function App() {
                 <BookMark
                   localDataes={localDataes}
                   setLocalDataes={setLocalDataes}
+                  localIdList={localIdList}
+                  setLocalIdList={setLocalIdList}
+                  isBookmarked={isBookmarked}
+                  setIsBookmarked={setIsBookmarked}
                 />
               }
             />
