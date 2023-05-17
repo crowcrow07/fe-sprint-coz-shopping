@@ -9,7 +9,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex sticky justify-between border border-black h-80 items-center">
+    <header className="flex w-full h-20 items-center justify-between px-16 shadow-md sticky top-0 bg-white z-50">
       <div>
         <img
           className="cursor-pointer"

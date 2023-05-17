@@ -4,7 +4,7 @@ const API_BASE = "http://cozshopping.codestates-seb.link/api/v1/products";
 
 export default {
   getAllProducts() {
-    const allProducts = fetch({ API_BASE });
+    const allProducts = fetch(API_BASE);
     return allProducts;
   },
   getFourProducts() {

@@ -32,15 +32,17 @@ export default function Main({ localDataes, setLocalDataes }) {
         <div className="m-2 font-bold text-2xl">북마크 리스트</div>
         <div className="flex flex-row justify-between">
           {localDataes &&
-            localDataes.map((data) => {
-              return (
-                <ProductCard
-                  key={localDataes.id}
-                  productsData={data}
-                  localDataes={localDataes}
-                  setLocalDataes={setLocalDataes}
-                />
-              );
+            localDataes.map((data, idx) => {
+              if (idx <= 3) {
+                return (
+                  <ProductCard
+                    key={localDataes.id}
+                    productsData={data}
+                    localDataes={localDataes}
+                    setLocalDataes={setLocalDataes}
+                  />
+                );
+              }
             })}
         </div>
       </div>
