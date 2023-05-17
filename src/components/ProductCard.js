@@ -1,49 +1,24 @@
 import StarIcon from "@mui/icons-material/Star";
 
-export default function ProductCard({
-  productsData,
-  localDataes,
-  setLocalDataes,
-  localIdList,
-  setLocalIdList,
-}) {
-  const imgUrl = productsData.image_url;
-  const brandImgUrl = productsData.brand_image_url;
+export function getIsBookMarked(bookMarkedIdList, id) {
+  return bookMarkedIdList.includes(id);
+}
 
-  const onClickHandler = () => {
-    if (
-      localDataes.findIndex((localData) => localData.id === productsData.id) ===
-      -1
-    ) {
-      setLocalDataes([...localDataes, productsData]);
-    } else {
-      setLocalDataes(
-        localDataes.filter((localData) => {
-          return localData.id !== productsData.id;
-        })
-      );
-    }
-  };
+export function toggleBookMarked(bookMarkedIdList, setBookMarkedIdList, id) {
+  if (!getIsBookMarked(bookMarkedIdList, id)) {
+    setBookMarkedIdList([...bookMarkedIdList, id]);
+  } else {
+    setBookMarkedIdList(
+      bookMarkedIdList.filter((v) => {
+        return v !== id;
+      })
+    );
+  }
+}
 
-  const isClickedBookMark = (id) => {
-    if (localIdList.findIndex((v) => v === productsData.id) === -1) {
-      setLocalIdList([...localIdList, id]);
-    } else {
-      setLocalIdList(
-        localIdList.filter((v) => {
-          return v !== productsData.id;
-        })
-      );
-    }
-  };
-
-  const changeBookmarkBtn = (id) => {
-    if (localIdList.findIndex((v) => v === id) === -1) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+export default function ProductCard({ data, isBookMarked, onClickBookMark }) {
+  const imgUrl = data.image_url;
+  const brandImgUrl = data.brand_image_url;
 
   return (
     <div className="flex relative flex-col w-264 h-264">
@@ -53,13 +28,14 @@ export default function ProductCard({
           src={brandImgUrl ? brandImgUrl : imgUrl}
           alt="상품이미지"
         />
-        <div className="absolute bottom-14 right-2" onClick={onClickHandler}>
+        <div className="absolute bottom-14 right-2">
           <StarIcon
-            onClick={() => isClickedBookMark(productsData.id)}
+            onClick={() => {
+              onClickBookMark();
+            }}
             className="drop-shadow-lg"
             sx={{
-              color: () =>
-                changeBookmarkBtn(productsData.id) ? "#FFD361" : "#DFDFDF",
+              color: isBookMarked ? "#FFD361" : "#DFDFDF",
               fontSize: 40,
             }}
           />
@@ -67,72 +43,70 @@ export default function ProductCard({
       </div>
 
       <div className="flex flex-col h-1/5">
-        <Bottom productsData={productsData} />
+        <Bottom data={data} />
       </div>
     </div>
   );
 }
 
-function Bottom({ productsData }) {
-  switch (productsData.type) {
+function Bottom({ data }) {
+  switch (data.type) {
     case "Category":
-      return <CategoryBottom productsData={productsData} />;
+      return <CategoryBottom data={data} />;
     case "Product":
-      return <ProductBottom productsData={productsData} />;
+      return <ProductBottom data={data} />;
     case "Brand":
-      return <BrandBottom productsData={productsData} />;
+      return <BrandBottom data={data} />;
     case "Exhibition":
-      return <ExhibitionBottom productsData={productsData} />;
+      return <ExhibitionBottom data={data} />;
     default:
       return null;
   }
 }
 
-function ProductBottom({ productsData }) {
+function ProductBottom({ data }) {
   return (
     <div className="w-full">
       <div className="flex flex-row justify-between">
-        <div className="font-bold">{productsData.title}</div>
-        <div className="text-violet-600">
-          {productsData.discountPercentage}%
-        </div>
+        <div className="font-bold">{data.title}</div>
+        <div className="text-violet-600">{data.discountPercentage}%</div>
       </div>
 
       <div className="flex flex-row justify-end">
-        <div>{(+productsData.price).toLocaleString()}원</div>
+        <div>{(+data.price).toLocaleString()}원</div>
       </div>
     </div>
   );
 }
 
-function CategoryBottom({ productsData }) {
+function CategoryBottom({ data }) {
   return (
     <div className="w-full">
-      <div className="font-bold"># {productsData.title}</div>
+      <div className="font-bold"># {data.title}</div>
     </div>
   );
 }
 
-function ExhibitionBottom({ productsData }) {
+function ExhibitionBottom({ data }) {
   return (
     <div className="w-full">
       <div className="flex flex-row justify-between">
-        <div className="font-bold">{productsData.title}</div>
+        <div className="font-bold">{data.title}</div>
       </div>
-      <div className="flex">{productsData.sub_title}</div>
+      <div className="flex">{data.sub_title}</div>
     </div>
   );
 }
 
-function BrandBottom({ productsData }) {
+function BrandBottom({ data }) {
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <div className="font-bold">{productsData.brand_name}</div>
+        <div className="font-bold">{data.brand_name}</div>
         <div>관심고객수</div>
       </div>
       <div className="flex flex-row justify-end">
-        <div>{(+productsData.follower).toLocaleString()}명</div>
+        <div>{(+data.follower).toLocaleString()}명</div>
       </div>
     </div>
   );
