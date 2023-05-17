@@ -1,3 +1,35 @@
-export default function ProductsList() {
-  return <div>상품페이지</div>;
+import { useState, useEffect } from "react";
+
+import Products from "../api/Products";
+import Filter from "../components/Filter";
+import ProductCard from "../components/ProductCard";
+
+export default function ProductsList({ localDataes, setLocalDataes }) {
+  const [productsDataes, setProductsDataes] = useState(null);
+  useEffect(() => {
+    Products.getAllProducts()
+      .then((res) => res.json())
+      .then((json) => {
+        setProductsDataes(json);
+      });
+  }, []);
+  return (
+    <div className="flex flex-col w-screen items-center">
+      <div>
+        <Filter />
+      </div>
+      <div className="flex flex-row flex-wrap w-5/6 justify-between">
+        {productsDataes &&
+          productsDataes.map((data) => {
+            return (
+              <ProductCard
+                productsData={data}
+                localDataes={localDataes}
+                setLocalDataes={setLocalDataes}
+              />
+            );
+          })}
+      </div>
+    </div>
+  );
 }
