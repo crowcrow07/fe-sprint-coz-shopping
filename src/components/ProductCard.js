@@ -1,4 +1,5 @@
 import StarIcon from "@mui/icons-material/Star";
+import TransitionsModal from "./Modal";
 
 export function getIsBookMarked(bookMarkedIdList, id) {
   return bookMarkedIdList.includes(id);
@@ -20,20 +21,43 @@ export default function ProductCard({ data, isBookMarked, onClickBookMark }) {
   const imgUrl = data.image_url;
   const brandImgUrl = data.brand_image_url;
 
+  const imgSelector = () => {
+    if (brandImgUrl) {
+      return brandImgUrl;
+    } else {
+      return imgUrl;
+    }
+  };
+
+  const titleSelector = () => {
+    if (data.title) {
+      return data.title;
+    } else {
+      return data.brand_name;
+    }
+  };
+
   return (
-    <div className="flex relative flex-col w-264 h-264">
+    <div className="flex relative flex-col w-264 h-264 cursor-default">
+      <TransitionsModal
+        imgSelector={imgSelector()}
+        titleSelector={titleSelector()}
+        onClickBookMark={onClickBookMark}
+        isBookMarked={isBookMarked}
+      />
       <div className="h-4/5">
         <img
           className="h-full w-full rounded-lg"
-          src={brandImgUrl ? brandImgUrl : imgUrl}
+          src={imgSelector()}
           alt="상품이미지"
         />
+
         <div className="absolute bottom-14 right-2">
           <StarIcon
             onClick={() => {
               onClickBookMark();
             }}
-            className="drop-shadow-lg"
+            className="drop-shadow-lg cursor-pointer"
             sx={{
               color: isBookMarked ? "#FFD361" : "#DFDFDF",
               fontSize: 40,
