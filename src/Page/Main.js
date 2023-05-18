@@ -18,7 +18,7 @@ export default function Main({ bookMarkedIdList, setBookMarkedIdList }) {
 
   return (
     <div className="flex flex-col w-5/6">
-      <div className="m-2 font-bold text-2xl">상품 리스트</div>
+      <div className="m-2 font-bold text-2xl cursor-default">상품 리스트</div>
       <div className="flex flex-row justify-between">
         {products &&
           products.map((data) => {
@@ -39,7 +39,9 @@ export default function Main({ bookMarkedIdList, setBookMarkedIdList }) {
           })}
       </div>
       <div>
-        <div className="m-2 font-bold text-2xl">북마크 리스트</div>
+        <div className="m-2 font-bold text-2xl cursor-default">
+          북마크 리스트
+        </div>
         <div className="flex flex-row justify-between">
           {products &&
             products

@@ -13,7 +13,7 @@ export default function Header() {
       <div>
         <img
           className="cursor-pointer"
-          src="/logo.png"
+          src="/image/logo.png"
           alt="logo"
           onClick={openMain}
         />
