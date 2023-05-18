@@ -1,8 +1,11 @@
-export default function Filter() {
+export default function Filter({ typeButtonHandler }) {
   return (
     <div className="flex justify-center items-center w-screen h-32  m-4">
       <div className="flex justify-between w-1/2">
-        <div className="flex flex-col items-center cursor-pointer">
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => typeButtonHandler("All")}
+        >
           <img
             className="w-20 h-20  rounded-full"
             src="/image/전체.jpeg"
@@ -10,7 +13,10 @@ export default function Filter() {
           />
           <div className="m-2">전체</div>
         </div>
-        <div className="flex flex-col items-center cursor-pointer">
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => typeButtonHandler("Product")}
+        >
           <img
             className="w-20 h-20 rounded-full"
             src="/image/상품.jpeg"
@@ -18,7 +24,10 @@ export default function Filter() {
           />
           <div className="m-2">상품</div>
         </div>
-        <div className="flex flex-col items-center cursor-pointer">
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => typeButtonHandler("Category")}
+        >
           <img
             className="w-20 h-20 rounded-full"
             src="/image/카테고리.jpeg"
@@ -26,7 +35,10 @@ export default function Filter() {
           />
           <div className="m-2">카테고리</div>
         </div>
-        <div className="flex flex-col items-center cursor-pointer">
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => typeButtonHandler("Exhibition")}
+        >
           <img
             className="w-20 h-20 rounded-full"
             src="/image/기획전.jpeg"
@@ -34,7 +46,10 @@ export default function Filter() {
           />
           <div className="m-2">기획전</div>
         </div>
-        <div className="flex flex-col items-center cursor-pointer">
+        <div
+          className="flex flex-col items-center cursor-pointer"
+          onClick={() => typeButtonHandler("Brand")}
+        >
           <img
             className="w-20 h-20 rounded-full"
             src="/image/브랜드.jpeg"
