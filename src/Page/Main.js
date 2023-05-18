@@ -8,11 +8,17 @@ import Products from "../api/Products";
 
 export default function Main({ bookMarkedIdList, setBookMarkedIdList }) {
   const [products, setproducts] = useState(null);
+  const [bookMarkProducts, setBookMarkProducts] = useState(null);
   useEffect(() => {
     Products.getFourProducts()
       .then((res) => res.json())
       .then((json) => {
         setproducts(json);
+      });
+    Products.getAllProducts()
+      .then((res) => res.json())
+      .then((json) => {
+        setBookMarkProducts(json);
       });
   }, []);
 
@@ -43,8 +49,8 @@ export default function Main({ bookMarkedIdList, setBookMarkedIdList }) {
           북마크 리스트
         </div>
         <div className="flex flex-row justify-between">
-          {products &&
-            products
+          {bookMarkProducts &&
+            bookMarkProducts
               .filter((e) => bookMarkedIdList.includes(e.id))
               .map((data, idx) => {
                 if (idx <= 3) {
