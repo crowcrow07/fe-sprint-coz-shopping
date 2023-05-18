@@ -1,10 +1,22 @@
+import { useState } from "react";
+
 export default function Filter({ typeButtonHandler }) {
+  const [checkedHandler, setCheckedHandler] = useState("All");
+
+  const checkedTypeButton = (type) => {};
   return (
     <div className="flex justify-center items-center w-screen h-32  m-4">
       <div className="flex justify-between w-1/2">
         <div
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => typeButtonHandler("All")}
+          className={`flex flex-col items-center cursor-pointer ${
+            checkedHandler === "All"
+              ? `font-bold text-violet-600 underline`
+              : ``
+          }`}
+          onClick={() => {
+            typeButtonHandler("All");
+            setCheckedHandler("All");
+          }}
         >
           <img
             className="w-20 h-20  rounded-full"
@@ -14,8 +26,15 @@ export default function Filter({ typeButtonHandler }) {
           <div className="m-2">전체</div>
         </div>
         <div
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => typeButtonHandler("Product")}
+          className={`flex flex-col items-center cursor-pointer ${
+            checkedHandler === "Product"
+              ? `font-bold text-violet-600 underline`
+              : ``
+          }`}
+          onClick={() => {
+            typeButtonHandler("Product");
+            setCheckedHandler("Product");
+          }}
         >
           <img
             className="w-20 h-20 rounded-full"
@@ -25,8 +44,15 @@ export default function Filter({ typeButtonHandler }) {
           <div className="m-2">상품</div>
         </div>
         <div
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => typeButtonHandler("Category")}
+          className={`flex flex-col items-center cursor-pointer ${
+            checkedHandler === "Category"
+              ? `font-bold text-violet-600 underline`
+              : ``
+          }`}
+          onClick={() => {
+            typeButtonHandler("Category");
+            setCheckedHandler("Category");
+          }}
         >
           <img
             className="w-20 h-20 rounded-full"
@@ -36,8 +62,15 @@ export default function Filter({ typeButtonHandler }) {
           <div className="m-2">카테고리</div>
         </div>
         <div
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => typeButtonHandler("Exhibition")}
+          className={`flex flex-col items-center cursor-pointer ${
+            checkedHandler === "Exhibition"
+              ? `font-bold text-violet-600 underline`
+              : ``
+          }`}
+          onClick={() => {
+            typeButtonHandler("Exhibition");
+            setCheckedHandler("Exhibition");
+          }}
         >
           <img
             className="w-20 h-20 rounded-full"
@@ -47,8 +80,15 @@ export default function Filter({ typeButtonHandler }) {
           <div className="m-2">기획전</div>
         </div>
         <div
-          className="flex flex-col items-center cursor-pointer"
-          onClick={() => typeButtonHandler("Brand")}
+          className={`flex flex-col items-center cursor-pointer ${
+            checkedHandler === "Brand"
+              ? `font-bold text-violet-600 underline`
+              : ``
+          }`}
+          onClick={() => {
+            typeButtonHandler("Brand");
+            setCheckedHandler("Brand");
+          }}
         >
           <img
             className="w-20 h-20 rounded-full"
