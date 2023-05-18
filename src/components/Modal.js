@@ -58,7 +58,11 @@ export default function TransitionsModal({
               />
             </div>
 
-            <img className="p-0 w-full h-full" src={imgSelector} alt="이미지" />
+            <img
+              className="p-0 w-full h-full rounded-2xl"
+              src={imgSelector}
+              alt="이미지"
+            />
           </Box>
         </Fade>
       </Modal>
@@ -77,4 +81,5 @@ const style = {
   boxShadow: 24,
   p: 4,
   padding: 0,
+  borderRadius: 10,
 };

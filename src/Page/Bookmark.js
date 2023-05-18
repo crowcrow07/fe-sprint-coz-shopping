@@ -15,15 +15,32 @@ export default function BookMark({ bookMarkedIdList, setBookMarkedIdList }) {
         setproducts(json);
       });
   }, []);
+
+  const [selectType, setSelectType] = useState("All");
+
+  const typeButtonHandler = (type) => {
+    if (type === "All") {
+      setSelectType("All");
+    } else {
+      setSelectType(type);
+    }
+  };
+
+  const productsToRender =
+    products &&
+    (selectType === "All"
+      ? products
+      : products.filter((v) => v.type === selectType));
+
   return (
     <div className="w-full flex flex-col items-center">
       <div className="flex justify-end">
-        <Filter />
+        <Filter typeButtonHandler={typeButtonHandler} />
       </div>
 
       <div className="flex flex-row w-5/6 flex-wrap justify-between">
-        {products &&
-          products
+        {productsToRender &&
+          productsToRender
             .filter((e) => bookMarkedIdList.includes(e.id))
             .map((data) => {
               return (
