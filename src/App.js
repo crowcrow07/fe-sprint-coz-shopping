@@ -10,7 +10,8 @@ import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
-  const [localDataes, setLocalDataes] = useState([]);
+  const [bookMarkedIdList, setBookMarkedIdList] = useState([]);
+  const [bookMarkedList, setBookMarkedList] = useState([]);
 
   return (
     <div className="App">
@@ -22,8 +23,8 @@ function App() {
               path="/"
               element={
                 <Main
-                  localDataes={localDataes}
-                  setLocalDataes={setLocalDataes}
+                  bookMarkedIdList={bookMarkedIdList}
+                  setBookMarkedIdList={setBookMarkedIdList}
                 />
               }
             />
@@ -31,8 +32,10 @@ function App() {
               path="/products/list"
               element={
                 <ProductsList
-                  localDataes={localDataes}
-                  setLocalDataes={setLocalDataes}
+                  bookMarkedIdList={bookMarkedIdList}
+                  setBookMarkedIdList={setBookMarkedIdList}
+                  bookMarkedList={bookMarkedList}
+                  setBookMarkedList={setBookMarkedList}
                 />
               }
             />
@@ -40,8 +43,8 @@ function App() {
               path="/bookmark"
               element={
                 <BookMark
-                  localDataes={localDataes}
-                  setLocalDataes={setLocalDataes}
+                  bookMarkedIdList={bookMarkedIdList}
+                  setBookMarkedIdList={setBookMarkedIdList}
                 />
               }
             />

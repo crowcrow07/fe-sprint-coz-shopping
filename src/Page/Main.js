@@ -1,29 +1,39 @@
 import { useState, useEffect } from "react";
 
-import ProductCard from "../components/ProductCard";
+import ProductCard, {
+  getIsBookMarked,
+  toggleBookMarked,
+} from "../components/ProductCard";
 import Products from "../api/Products";
 
-export default function Main({ localDataes, setLocalDataes }) {
-  const [productsDataes, setProductsDataes] = useState(null);
+export default function Main({ bookMarkedIdList, setBookMarkedIdList }) {
+  const [products, setproducts] = useState(null);
   useEffect(() => {
     Products.getFourProducts()
       .then((res) => res.json())
       .then((json) => {
-        setProductsDataes(json);
+        setproducts(json);
       });
   }, []);
+
   return (
     <div className="flex flex-col w-5/6">
       <div className="m-2 font-bold text-2xl">상품 리스트</div>
       <div className="flex flex-row justify-between">
-        {productsDataes &&
-          productsDataes.map((data) => {
+        {products &&
+          products.map((data) => {
             return (
               <ProductCard
                 key={data.id}
-                productsData={data}
-                localDataes={localDataes}
-                setLocalDataes={setLocalDataes}
+                data={data}
+                isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
+                onClickBookMark={() => {
+                  toggleBookMarked(
+                    bookMarkedIdList,
+                    setBookMarkedIdList,
+                    data.id
+                  );
+                }}
               />
             );
           })}
@@ -31,19 +41,27 @@ export default function Main({ localDataes, setLocalDataes }) {
       <div>
         <div className="m-2 font-bold text-2xl">북마크 리스트</div>
         <div className="flex flex-row justify-between">
-          {localDataes &&
-            localDataes.map((data, idx) => {
-              if (idx <= 3) {
-                return (
-                  <ProductCard
-                    key={localDataes.id}
-                    productsData={data}
-                    localDataes={localDataes}
-                    setLocalDataes={setLocalDataes}
-                  />
-                );
-              }
-            })}
+          {products &&
+            products
+              .filter((e) => bookMarkedIdList.includes(e.id))
+              .map((data, idx) => {
+                if (idx <= 3) {
+                  return (
+                    <ProductCard
+                      key={data.id}
+                      data={data}
+                      isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
+                      onClickBookMark={() => {
+                        toggleBookMarked(
+                          bookMarkedIdList,
+                          setBookMarkedIdList,
+                          data.id
+                        );
+                      }}
+                    />
+                  );
+                }
+              })}
         </div>
       </div>
     </div>
