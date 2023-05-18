@@ -20,29 +20,78 @@ export default function ProductsList({
       });
   }, []);
 
+  const [selectType, setSelectType] = useState("All");
+
+  const typeButtonHandler = (type) => {
+    if (type === "All") {
+      setSelectType("All");
+    } else {
+      setSelectType(type);
+    }
+  };
+
   return (
     <div className="flex flex-col w-screen items-center">
       <div>
-        <Filter />
+        <Filter typeButtonHandler={typeButtonHandler} />
       </div>
       <div className="flex flex-row flex-wrap w-5/6 justify-between">
+        {selectType === "All"
+          ? products &&
+            products.map((data) => {
+              return (
+                <ProductCard
+                  key={data.id}
+                  data={data}
+                  isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
+                  onClickBookMark={() => {
+                    toggleBookMarked(
+                      bookMarkedIdList,
+                      setBookMarkedIdList,
+                      data.id
+                    );
+                  }}
+                />
+              );
+            })
+          : products &&
+            products
+              .filter((v) => v.type === selectType)
+              .map((data) => {
+                return (
+                  <ProductCard
+                    key={data.id}
+                    data={data}
+                    isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
+                    onClickBookMark={() => {
+                      toggleBookMarked(
+                        bookMarkedIdList,
+                        setBookMarkedIdList,
+                        data.id
+                      );
+                    }}
+                  />
+                );
+              })}
         {products &&
-          products.map((data) => {
-            return (
-              <ProductCard
-                key={data.id}
-                data={data}
-                isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
-                onClickBookMark={() => {
-                  toggleBookMarked(
-                    bookMarkedIdList,
-                    setBookMarkedIdList,
-                    data.id
-                  );
-                }}
-              />
-            );
-          })}
+          products
+            .filter((v) => v.type === selectType)
+            .map((data) => {
+              return (
+                <ProductCard
+                  key={data.id}
+                  data={data}
+                  isBookMarked={getIsBookMarked(bookMarkedIdList, data.id)}
+                  onClickBookMark={() => {
+                    toggleBookMarked(
+                      bookMarkedIdList,
+                      setBookMarkedIdList,
+                      data.id
+                    );
+                  }}
+                />
+              );
+            })}
       </div>
     </div>
   );
