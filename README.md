@@ -10,3 +10,31 @@
 ```jsx
 npm install
 ```
+
+## 파일구조
+
+```
+src
+├─ App.css
+├─ App.js
+├─ App.test.js
+├─ Page
+│  ├─ BookMark.js
+│  ├─ Main.js
+│  └─ ProductsList.js
+├─ api
+│  └─ Products.js
+├─ components
+│  ├─ Filter.js
+│  ├─ Footer.js
+│  ├─ Hamburger.js
+│  ├─ Header.js
+│  ├─ Modal.js
+│  └─ ProductCard.js
+├─ index.css
+├─ index.js
+├─ reportWebVitals.js
+├─ setupTests.js
+└─ store
+   └─ index.js
+```
