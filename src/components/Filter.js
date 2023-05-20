@@ -3,7 +3,6 @@ import { useState } from "react";
 export default function Filter({ typeButtonHandler }) {
   const [checkedHandler, setCheckedHandler] = useState("All");
 
-  const checkedTypeButton = (type) => {};
   return (
     <div className="flex justify-center items-center w-screen h-32  m-4">
       <div className="flex justify-between w-1/2">
